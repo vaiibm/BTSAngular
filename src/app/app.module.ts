@@ -4,11 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { CreateBugComponent } from './create-bug/create-bug.component';
+import { ShowBugsComponent } from './show-bugs/show-bugs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateBugComponent
+    CreateBugComponent,
+    ShowBugsComponent
   ],
   imports: [
     BrowserModule,HttpClientModule,FormsModule

@@ -1,9 +1,14 @@
-<p>create-bug works!</p>
+
+<div class="container-fluid text-center" style="background-color: #f8f9fa;">
+  <div class="row content"><div id="bugDetails" style="background-color: #f8f9fa;align-content:center;">
+  <!-- <form class="form-inline"> -->
+      <div class="col-sm-10 text-left" id="column1" style="background-color: #f8f9fa;">
+          <div id="bugFields" class="column form-group">
 <label><b>Bug ID</b></label>
 <input class="form-control" type="text" placeholder="Enter Bug ID" [(ngModel)]=bug.id>
 <br>
 
-<label><b>Bug Name <span style="color:red">*</span></b></label>
+<label><b>Bug Name <span style="color:red">* </span></b></label>
 
 <input class="form-control" type="text" placeholder="Enter Bug Name" id='bugname' [(ngModel)]=bug.name required>
 <br>
@@ -47,7 +52,8 @@
     <option value='RUNTIME'>RUNTIME</option>
 </select>
 <br>
-
+</div>
+<div class="column form-group" id="column2" style="background-color: #f8f9fa;">
 <!-- <div class="column form-group" id="column2" style="background-color: #f8f9fa;"> -->
 <label><b>Severity <span style="color:red">*</span></b></label>
 <select class="form-control" id='severity' [(ngModel)]=bug.severity>
@@ -75,5 +81,10 @@
 <br>
 <label><b>Description <span style="color:red">*</span></b></label>
 <textarea class="form-control" name="" id="description" cols="30" rows="4" [(ngModel)]=bug.description></textarea>
-<br>
-<button (click)='save()'>Save</button>
+
+</div>
+
+</div>
+<button class="submitButton"  (click)='save()'>Save</button>
+</div></div></div>
+<br><br><br><br>

@@ -5,7 +5,9 @@ import {BugService} from '../bug.service'
 @Component({
   selector: 'app-create-bug',
   templateUrl: './create-bug.component.html',
-  styleUrls: ['./create-bug.component.css']
+  styleUrls: ['./create-bug.component.css','./style.css']
+
+
 })
 export class CreateBugComponent implements OnInit {
 title:string="CreateBug";
@@ -13,9 +15,6 @@ bug:Bug= new Bug();
 bugArray:Bug[]=[];
  constructor( private bugService:BugService){}
  save(){
-  // console.log("button binding works");
-  // console.log(this.user.firstname);
-  // this.user.firstname="rrr";
   const promise=this.bugService.save(this.bug);
   promise.subscribe(response =>{
     console.log(response);
@@ -25,7 +24,7 @@ bugArray:Bug[]=[];
   },
   error=>{
     console.log(error);
-    alert(error.statusText)
+    alert("Error !! : "+error.headers.get("error"))
   })
 }
   ngOnInit(): void {
