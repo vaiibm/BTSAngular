@@ -1,11 +1,42 @@
+<div class="container-fluid text-center" style="background-color: #f8f9fa;">
+  <div class="row content">
+      <div class="col-sm-2 sidenav">
+          <br>
+
+        <app-sidenav></app-sidenav>
+      </div>
 
 
- <input [(ngModel)]=bug.name id='bugId' class="form-control form-control-lg form-control-borderless"
-                                        type="search" placeholder="Enter Bug Name">
-                                        <div class="col-auto">
-<button (click)='getBugs(bug.name)' class="btn btn-lg btn-success" > Search</button></div>
+
+
+      <div id='search' class="col-sm-8 bg-light text-dark" style="background-color:#f8f9fa">
+          <div class="container">
+              <br />
+              <div class="row justify-content-center">
+                  <div class="col-1 col-md-1 col-lg-1">
+                  </div>
+                  <div class="col-8 col-md-6 col-lg-6">
+
+                      <div class="card-body row no-gutters align-items-center">
+                          <div class="col-auto">
+                              <i class="fas fa-search h4 text-body"></i>
+                          </div>
+                          <!--end of col-->
+<input [(ngModel)]=bug.name  class="form-control form-control-lg form-control-borderless" type="search"
+  placeholder="Enter Bug Name">
+<div class="col-auto">
+  <button (click)='getBugs(bug.name)' class="btn btn-lg btn-success"> Search</button>
+</div>
+<input [(ngModel)]=bug.status class="form-control form-control-lg form-control-borderless" type="search"
+  placeholder="Enter Status value">
+<div class="col-auto">
+  <button (click)='getBugsByStatus(bug.status)' class="btn btn-lg btn-success"> Search</button>
+</div>
 <table class='table'>
-  <thead><td>name</td><td>id</td></thead>
+  <thead>
+    <th>name</th>
+    <th>id</th>
+  </thead>
   <tbody>
     <tr *ngFor='let bug of bugArray; index as i'>
       <td>{{bug.name}}</td>

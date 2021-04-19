@@ -17,6 +17,11 @@ bugArray:any;
       observable.subscribe(response=>{console.log(response);this.bugArray=response});
 
     }
+    getBugsByStatus(status:string)
+    {
+      const observable=this.bugService.getBugsByStatus(status);
+      observable.subscribe(response=>{console.log(response);this.bugArray=response});
+    }
 
 
   ngOnInit(): void {
