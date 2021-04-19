@@ -19,13 +19,17 @@ bugArray:Bug[]=[];
   promise.subscribe(response =>{
     console.log(response);
     alert('bug added..')
-    this.bugArray.push(Object.assign({},this.bug));
+    this.bugArray.push(Object.assign({},this.bug))},
 
-  },
+
   error=>{
     console.log(error);
+    if(!error.ok)
     alert("Error !! : "+error.headers.get("error"))
-  })
+    else{
+      alert('bug added..');
+    }
+  });
 }
   ngOnInit(): void {
   }
