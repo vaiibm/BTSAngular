@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Bug } from '../Bug';
 import {BugService} from '../bug.service'
 
@@ -11,10 +11,13 @@ import {BugService} from '../bug.service'
 })
 export class CreateBugComponent implements OnInit {
 title:string="CreateBug";
-bug:Bug= new Bug();
+ bug:Bug= new Bug();
+bug1:Bug= new Bug();
 bugArray:Bug[]=[];
  constructor( private bugService:BugService){}
  save(){
+   if(!this.bugService.validateBug(this.bug))
+   return;
   const promise=this.bugService.save(this.bug);
   promise.subscribe(response =>{
     console.log(response);
@@ -32,6 +35,8 @@ bugArray:Bug[]=[];
   });
 }
   ngOnInit(): void {
+    document.getElementById('searchbutton').className='btn btn-primary';
+    document.getElementById('createbutton').className='btn btn-link';
   }
 
 }

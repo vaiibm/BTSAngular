@@ -8,6 +8,7 @@ import { ShowBugsComponent } from './show-bugs/show-bugs.component';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { UpdateBugComponent } from './update-bug/update-bug.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,14 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     CreateBugComponent,
     ShowBugsComponent,
     HeaderComponent,
-    SidenavComponent
+    SidenavComponent,
+    UpdateBugComponent
   ],
   imports: [
     BrowserModule,RouterModule.forRoot([
       {path: 'create', component: CreateBugComponent},
       {path: 'search', component: ShowBugsComponent},
+      {path: 'update', component: UpdateBugComponent},
       {path: '', redirectTo: '/search', pathMatch: 'full'},
     ]),
     HttpClientModule,FormsModule
