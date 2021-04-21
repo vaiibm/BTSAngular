@@ -6,6 +6,9 @@ import { Bug } from './Bug';
   providedIn: 'root'
 })
 export class BugService {
+  getBugByNameAndStatus(name: string, status: string) {
+    return this.http.get('http://localhost:8083/bug/search?status=' + status+'&name='+name);
+  }
 
 
 
@@ -16,8 +19,9 @@ export class BugService {
   getBugs(name: string) {
     return this.http.get('http://localhost:8083/bug/' + name);
   }
+
   getBugsByStatus(status: string) {
-    return this.http.get('http://localhost:8083/bug/status/' + status);
+    return this.http.get('http://localhost:8083/bug/status/'+status);
   }
 
   validateBug(bug: Bug) {

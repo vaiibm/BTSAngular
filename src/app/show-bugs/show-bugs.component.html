@@ -1,7 +1,7 @@
 <div class="container-fluid text-center" style="background-color: #f8f9fa;">
   <div class="row content">
-    <div class="">
-      <br>
+    <div style="background-color: #bfcee0;padding-bottom: 1%;padding-top: 1%;">
+
 
       <app-sidenav></app-sidenav>
     </div>
@@ -20,16 +20,16 @@
 
               <!--end of col-->
               <div class="form-inline">
-                <br>
+
                 <input [(ngModel)]=bug.name class="form-control form-control-lg form-control-borderless" type="search"
                   placeholder="Enter Bug Name">
 
-                <button (click)='getBugs(bug.name)' style="margin: 10px;margin-right: 100px;"
-                  class="btn btn-lg btn-success"> Search</button>
+                <!-- <button (click)='getBugs(bug.name)' style="margin: 10px;margin-right: 100px;"
+                  class="btn btn-lg btn-success"> Search</button> -->
                 <span class="col-1 col-md-1 col-lg-1"> </span>
                 <label> </label>
                 <label> </label>
-                <select style="margin: 10px;" class="form-control" id="status" [(ngModel)]=bug.status>
+                <select placeholder=" ddd" style="margin: 10px;" class="form-control" id="status" [(ngModel)]=bug.status>
                   <option value='NEW'>NEW</option>
                   <option value='ASSIGNED'>ASSIGNED</option>
                   <option value='OPEN'>OPEN</option>
@@ -45,10 +45,10 @@
                   <option value='NOT_A_BUG'>NOT_A_BUG</option>
                 </select>
 
-                <button style="margin: 10px;" (click)='getBugsByStatus(bug.status)' class="btn btn-lg btn-success">
+                <button style="margin: 10px;" (click)='getBug(bug.name,bug.status)' class="btn btn-lg btn-success">
                   Search</button><br><br><br>
               </div>
-              <br>
+
               <table class="table table-bordered">
                 <thead style="text-align-last: center;">
                   <tr>

@@ -1,5 +1,6 @@
 import { getNumberOfCurrencyDigits } from '@angular/common';
 import { ANALYZE_FOR_ENTRY_COMPONENTS, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Bug } from '../Bug';
 import { BugService } from '../bug.service'
 @Component({
@@ -22,7 +23,47 @@ export class ShowBugsComponent implements OnInit {
     });
 
   }
+
+  getBugByNameAndStatus(name:string,status: string)
+  {
+
+    const observable = this.bugService.getBugByNameAndStatus(name,status);
+    observable.subscribe(response => {
+      console.log(response); this.bugArray = response;
+      if (this.bugArray[0] == undefined) {
+        return alert("No Resposne for this input name and STATUS");
+      }
+    },
+      error => {
+        console.log(error);
+        if (!error.ok)
+          alert("Error !! : " + error.headers.get("error"))
+        else {
+          alert('..');
+        }
+      });
+  }
+
+  getBug(name:string,status: string)
+  {
+    if(name&&status)
+    {
+      this.getBugByNameAndStatus(name,status);
+    }
+    else if(name&&!status){
+    this.getBugs(name);
+    }
+    else if(!name&&status)
+    {
+      this.getBugsByStatus(status);
+    }
+    else{
+this.getBugs('');
+    }
+  }
   getBugsByStatus(status: string) {
+
+
     const observable = this.bugService.getBugsByStatus(status);
     observable.subscribe(response => {
       console.log(response); this.bugArray = response;
@@ -42,6 +83,8 @@ export class ShowBugsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.bug.status='';
+    this.bug.name='';
     const observable = this.bugService.getBugs('');
     observable.subscribe(response => {
       this.bugArray = response;
