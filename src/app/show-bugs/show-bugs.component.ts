@@ -18,52 +18,54 @@ export class ShowBugsComponent implements OnInit {
     observable.subscribe(response => {
       console.log(response); this.bugArray = response;
       if (this.bugArray[0] == undefined) {
-        return alert("No Resposne for this input");
+        return alert("No Record found for given name");
+      }
+    },
+    error => {
+      console.log(error);
+      if (error.statusText!=='OK')
+        alert("Error not able to get record.  ")
+      else {
+        alert('Error not able to get record.');
       }
     });
 
   }
 
-  getBugByNameAndStatus(name:string,status: string)
-  {
+  getBugByNameAndStatus(name: string, status: string) {
 
-    const observable = this.bugService.getBugByNameAndStatus(name,status);
+    const observable = this.bugService.getBugByNameAndStatus(name, status);
     observable.subscribe(response => {
       console.log(response); this.bugArray = response;
       if (this.bugArray[0] == undefined) {
-        return alert("No Resposne for this input name and STATUS");
+        return alert("No Record found for given Name and Status");
       }
     },
       error => {
         console.log(error);
-        if (!error.ok)
-          alert("Error !! : " + error.headers.get("error"))
+        if (error.statusText!=='OK')
+          alert("Error not able to get record. " )
         else {
-          alert('..');
+          alert('Error not able to get record.');
         }
       });
   }
 
-  getBug(name:string,status: string)
-  {
-    if(name&&status)
-    {
-      this.getBugByNameAndStatus(name,status);
+  getBug(name: string, status: string) {
+    if (name && status) {
+      this.getBugByNameAndStatus(name, status);
     }
-    else if(name&&!status){
-    this.getBugs(name);
+    else if (name && !status) {
+      this.getBugs(name);
     }
-    else if(!name&&status)
-    {
+    else if (!name && status) {
       this.getBugsByStatus(status);
     }
-    else{
-this.getBugs('');
+    else {
+      this.getBugs('');
     }
   }
   getBugsByStatus(status: string) {
-
-
     const observable = this.bugService.getBugsByStatus(status);
     observable.subscribe(response => {
       console.log(response); this.bugArray = response;
@@ -73,24 +75,28 @@ this.getBugs('');
     },
       error => {
         console.log(error);
-        if (!error.ok)
-          alert("Error !! : " + error.headers.get("error"))
+        if (error.statusText!=='OK')
+          alert("Error not able to get record.")
         else {
-          alert('..');
+          alert('Error not able to get record.');
         }
       });
   }
 
 
   ngOnInit(): void {
-    this.bug.status='';
-    this.bug.name='';
+    this.bug.status = '';
+    this.bug.name = '';
     const observable = this.bugService.getBugs('');
     observable.subscribe(response => {
       this.bugArray = response;
       if (this.bugArray[0] == undefined) {
         return alert("No Records available  currently from server");
       }
+    },
+    error=>{
+      if(error.statusText!=='OK')
+      return alert("Unable to fetch records from server");
     });
   }
 

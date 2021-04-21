@@ -29,7 +29,8 @@
                 <span class="col-1 col-md-1 col-lg-1"> </span>
                 <label> </label>
                 <label> </label>
-                <select placeholder=" ddd" style="margin: 10px;" class="form-control" id="status" [(ngModel)]=bug.status>
+                <select placeholder=" ddd" style="margin: 10px;" class="form-control" id="status"
+                  [(ngModel)]=bug.status>
                   <option value='NEW'>NEW</option>
                   <option value='ASSIGNED'>ASSIGNED</option>
                   <option value='OPEN'>OPEN</option>
@@ -53,7 +54,6 @@
                 <thead style="text-align-last: center;">
                   <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">ID</th>
                     <th scope="col">STATUS</th>
                     <th scope="col">TYPE</th>
                     <th scope="col" s>ETA</th>
@@ -67,7 +67,7 @@
                 <tbody>
                   <tr *ngFor='let bug of bugArray; index as i'>
                     <td>{{bug.name}}</td>
-                    <td>{{bug.id}}</td>
+
                     <td>{{bug.status}}</td>
 
                     <td>{{bug.type}}</td>
