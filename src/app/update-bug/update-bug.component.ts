@@ -21,9 +21,16 @@ export class UpdateBugComponent implements OnInit {
   getFieldData() {
     let takevalue = (<HTMLInputElement>document.getElementById('takevalue')).value;
     const observable = this.bugService.getBugs(takevalue);
-    observable.subscribe(response => {
-      this.tempbug = response;
+    observable.subscribe(response => {this.tempbug = response;
+      if (this.tempbug[0] == undefined) {
+        return alert("No Resposne for this input");
+      }
       this.bug = this.tempbug;
+
+
+    },
+    erro=>{
+      return alert("No Resposne for this input");
     });
   }
 
