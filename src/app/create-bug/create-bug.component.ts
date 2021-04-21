@@ -11,8 +11,8 @@ import {BugService} from '../bug.service'
 })
 export class CreateBugComponent implements OnInit {
 title:string="CreateBug";
- bug:Bug= new Bug();
-bug1:Bug= new Bug();
+@Input()  bug:Bug= new Bug();
+ bugchild:Bug= new Bug();
 bugArray:Bug[]=[];
  constructor( private bugService:BugService){}
  save(){
@@ -27,7 +27,7 @@ bugArray:Bug[]=[];
 
   error=>{
     console.log(error);
-    if(!error.ok)
+    if(error.statusText!=='OK')
     alert("Error !! : "+error.headers.get("error"))
     else{
       alert('bug added..');
