@@ -8,7 +8,7 @@ not implmented successfully yet
 @Component({
   selector: 'app-update-bug',
   templateUrl: './update-bug.component.html',
-  styleUrls: ['./update-bug.component.css']
+  styleUrls: ['./update-bug.component.css','./style.css']
 })
 export class UpdateBugComponent implements OnInit {
   bugArray: any;
@@ -19,28 +19,30 @@ export class UpdateBugComponent implements OnInit {
   constructor(private bugService: BugService) { }
 
   getFieldData() {
-    this.selectId = (<HTMLInputElement>document.getElementById('selectId')).value;
-    const observable = this.bugService.getBugs(this.selectId);
+    let takevalue = (<HTMLInputElement>document.getElementById('takevalue')).value;
+    const observable = this.bugService.getBugs(takevalue);
     observable.subscribe(response => {
       this.tempbug = response;
       this.bug = this.tempbug;
     });
   }
+
   ngOnInit(): void {
-    const observable = this.bugService.getBugs('');
-    observable.subscribe(response => {
-      this.bugArray = response;
-      let txt1 = "<select onchange='getFieldData()' name=\"id\" id=\"selectId\" class=\"form-control\"   style=\"display: block;margin:0 auto;\">";
-      for (let i = 0; i < this.bugArray.length; i++) {
-        txt1 += "<option  value='" + this.bugArray[i].id + "'>" + "  " + this.bugArray[i].name + "  </option>";
-      }
-      txt1 += "</select>";
-      if (document.getElementById('selectBug')) {
-        document.getElementById('selectBug').innerHTML = txt1;
-        this.getFieldData();
-      }
-    }
-    );
+    // const observable = this.bugService.getBugs('');
+    // observable.subscribe(response => {
+    //   this.bugArray = response;
+      // let txt1 = "<select (change)='this.getFieldData.emit()' name=\"id\" id=\"selectId\" class=\"form-control\"   style=\"display: block;margin:0 auto;\">";
+      // for (let i = 0; i < this.bugArray.length; i++) {
+      //   txt1 += "<option  value='" + this.bugArray[i].id + "'>" + "  " + this.bugArray[i].name + "  </option>";
+      // }
+      // txt1 += "</select>";
+      // let txt1="<input  class=\"form-control form-control-lg form-control-borderless\" type=\"search\" id='takevalue' placeholder=\"Enter Bug Name\"><button style=\"margin: 10px;\" onclick='getFieldData()' class=\"btn btn-lg btn-success\">    Search</button>";
+      // if (document.getElementById('selectBug')) {
+      //   document.getElementById('selectBug').innerHTML = txt1;
+       // this.getFieldData();
+      //}
+    }}
+
 
     // fetch('/bug/')
     // .then(response => response.json())
@@ -66,7 +68,4 @@ export class UpdateBugComponent implements OnInit {
     // 	if (document.getElementById('showbugdata')) {
     // 		getBug()
     // 	}
-    // })
-  }
-
-}
+    // }

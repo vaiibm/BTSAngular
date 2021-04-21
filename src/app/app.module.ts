@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { UpdateBugComponent } from './update-bug/update-bug.component';
+import { BugFormComponent } from './bug-form/bug-form.component';
+import { SelectBugComponent } from './select-bug/select-bug.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { UpdateBugComponent } from './update-bug/update-bug.component';
     ShowBugsComponent,
     HeaderComponent,
     SidenavComponent,
-    UpdateBugComponent
+    UpdateBugComponent,
+    BugFormComponent,
+    SelectBugComponent
   ],
   imports: [
     BrowserModule,RouterModule.forRoot([

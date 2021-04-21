@@ -1,3 +1,16 @@
+<div class="container-fluid text-center" style="background-color: #f8f9fa;">
 
-<app-create-bug  [bug]="bug"></app-create-bug>
+  <div class="container-fluid text-center" style="background-color: #dde5ee;">
+    <div class="row content">
+      <div class="col-sm-2 sidenav" style="background-color: #bfcee0;">
+
+        <app-sidenav></app-sidenav>
+      </div>
+      <div id="bugDetails" style="background-color: #f8f9fa;">
+        <div class="form-inline">
+          <div class="col-sm-10 text-left" id="column1" style="background-color: #f8f9fa;">
+            <div id='selectBug'>
+              <input  class="form-control form-control-lg form-control-borderless" type="search" id='takevalue' placeholder="Enter Bug Name"><button style="margin: 10px;" (click)='getFieldData()' class="btn btn-lg btn-success">    Search</button>
+            </div>
+<app-bug-form  [bug]="bug"></app-bug-form >
 

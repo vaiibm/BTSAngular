@@ -6,6 +6,9 @@ import { Bug } from './Bug';
   providedIn: 'root'
 })
 export class BugService {
+  putBug(bug:Bug) {
+    return this.http.put('http://localhost:8083/bug/'+bug.id, bug, { headers: { "content-type": 'application/json' } });
+  }
   getBugByNameAndStatus(name: string, status: string) {
     return this.http.get('http://localhost:8083/bug/search?status=' + status+'&name='+name);
   }
