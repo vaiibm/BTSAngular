@@ -8,9 +8,9 @@ describe('CreateBugComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateBugComponent ]
+      declarations: [CreateBugComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -5,7 +5,7 @@
 
     <label><b>Bug Name <span style="color:red">* </span></b></label>
 
-    <input class="form-control" type="text" placeholder="Minimum 1 and Maximun 25 characters are allowed" id='bugname'
+    <input class="form-control" type="text" placeholder="" id='bugname'
       [(ngModel)]=bug.name required><br>
     <!-- <span id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</span> -->
     <br>
@@ -37,7 +37,7 @@
     <label>ETA</label>
     <input class="form-control" id='date' type="date" [(ngModel)]=bug.eta><br>
     <label><b>Module <span style="color:red">*</span></b></label>
-    <input class="form-control" type="text" id='module' placeholder="Enter Module" [(ngModel)]=bug.module>
+    <input class="form-control" type="text" id='module' placeholder="" [(ngModel)]=bug.module>
     <br>
     <label><b>Build Version <span style="color:red">*</span></b></label>
     <input [(ngModel)]=bug.buildVersion class="form-control" type="text" id='buildversion'
@@ -73,11 +73,11 @@
     <br>
 
     <label><b>Developer ID</b></label>
-    <input class="form-control" type="text" id='developerid' placeholder="Enter Developer ID"
+    <input class="form-control" type="text" id='developerid' placeholder=""
       [(ngModel)]=bug.developerId>
     <br>
     <label><b>Tester ID</b></label>
-    <input class="form-control" type="text" id='testerid' placeholder="Enter Tester ID" [(ngModel)]=bug.testerId>
+    <input class="form-control" type="text" id='testerid' placeholder="" [(ngModel)]=bug.testerId>
     <br>
     <label><b>Synopsis <span style="color:red">*</span></b></label>
     <textarea class="form-control" name="" id="synopsis" cols="30" rows="2" [(ngModel)]=bug.synopsis></textarea>

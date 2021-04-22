@@ -6,15 +6,14 @@ import { Bug } from './Bug';
   providedIn: 'root'
 })
 export class BugService {
-  deleteBug(bugId:string)
-  {
-    return this.http.delete('http://localhost:8083/bug/'+bugId);
+  deleteBug(bugId: string) {
+    return this.http.delete('http://localhost:8083/bug/' + bugId);
   }
-  putBug(bug:Bug) {
-    return this.http.put('http://localhost:8083/bug/'+bug.id, bug, { headers: { "content-type": 'application/json' } });
+  putBug(bug: Bug) {
+    return this.http.put('http://localhost:8083/bug/' + bug.id, bug, { headers: { "content-type": 'application/json' } });
   }
   getBugByNameAndStatus(name: string, status: string) {
-    return this.http.get('http://localhost:8083/bug/search?status=' + status+'&name='+name);
+    return this.http.get('http://localhost:8083/bug/search?status=' + status + '&name=' + name);
   }
 
 
@@ -28,7 +27,7 @@ export class BugService {
   }
 
   getBugsByStatus(status: string) {
-    return this.http.get('http://localhost:8083/bug/status/'+status);
+    return this.http.get('http://localhost:8083/bug/status/' + status);
   }
 
   validateBug(bug: Bug) {

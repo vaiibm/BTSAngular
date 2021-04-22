@@ -31,6 +31,17 @@ export class ShowBugsComponent implements OnInit {
       });
 
   }
+  showDescription(description: string) {
+    document.getElementById('showDescription').innerHTML = description;
+
+    return document.getElementById('temp').click();
+  }
+
+  showSynopsis(synopsis: string) {
+    document.getElementById('showSynopsis').innerHTML = synopsis;
+
+    return document.getElementById('synopsisButton').click();
+  }
 
   getBugByNameAndStatus(name: string, status: string) {
 
@@ -73,9 +84,9 @@ export class ShowBugsComponent implements OnInit {
       observable.subscribe(response => {
         console.log(response);
 
-         alert("Bug Deleted Successfully");
+        alert("Bug Deleted Successfully");
 
-         return this.getBugs('');
+        return this.getBugs('');
 
       },
         error => {
