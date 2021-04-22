@@ -7,14 +7,20 @@
         <app-sidenav></app-sidenav>
       </div>
 
+      <div id="bugDetails" style="background-color: #f8f9fa;">
+
       <div class="form-inline">
         <div id='selectBug' style="background-color: #f8f9fb;">
+          <!-- <select class="form-control selectpicker" id="select-country" data-live-search="true">
+            <option data-tokens="china">China</option>
+        <option data-tokens="malayasia">Malayasia</option>
+        <option data-tokens="singapore">Singapore</option>
+            </select> -->
           <input style="margin-top: 20px;" class="form-control form-control-lg form-control-borderless" type="search"
             id='takevalue' placeholder="Enter Bug Name"><button style="margin: 10px;" (click)='getFieldData()'
             class="btn btn-lg btn-success"> Search</button>
         </div>
-        <div class="col-sm-10 text-left" id="column1" style="background-color: #f8f9fa;">
-          <div id="bugDetails" style="background-color: #f8f9fa;">
 
 
             <app-bug-form [bug]="bug"></app-bug-form>
+            </div></div></div></div>

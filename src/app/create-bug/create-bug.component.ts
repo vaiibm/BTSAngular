@@ -11,18 +11,19 @@ import {BugService} from '../bug.service'
 })
 export class CreateBugComponent implements OnInit {
 title:string="CreateBug";
-@Input()  bug:Bug= new Bug();
+bug:Bug= new Bug();
  bugchild:Bug= new Bug();
 bugArray:Bug[]=[];
  constructor( private bugService:BugService){}
- save(){
-   if(!this.bugService.validateBug(this.bug))
+ createBug(bug:Bug){
+   alert("in parent")
+   if(!this.bugService.validateBug(bug))
    return;
-  const promise=this.bugService.save(this.bug);
+  const promise=this.bugService.save(bug);
   promise.subscribe(response =>{
     console.log(response);
     alert('bug added..')
-    this.bugArray.push(Object.assign({},this.bug))},
+    },
 
 
   error=>{
@@ -37,6 +38,7 @@ bugArray:Bug[]=[];
   ngOnInit(): void {
     document.getElementById('searchbutton').className='btn btn-primary';
     document.getElementById('createbutton').className='btn btn-link';
+    document.getElementById('buttonSave').innerHTML='Create Bug'
   }
 
 }

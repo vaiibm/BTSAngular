@@ -35,6 +35,11 @@ export class UpdateBugComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    document.getElementById('buttonSave').innerHTML='Update Bug';
+    document.getElementById('searchbutton').className='btn btn-primary';
+    document.getElementById('createbutton').className='btn btn-primary';
+    document.getElementById('updatebutton').className='btn btn-link';
+    document.getElementById('buttonSave').innerHTML='Create Bug'
     // const observable = this.bugService.getBugs('');
     // observable.subscribe(response => {
     //   this.bugArray = response;

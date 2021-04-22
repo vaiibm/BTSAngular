@@ -6,6 +6,10 @@ import { Bug } from './Bug';
   providedIn: 'root'
 })
 export class BugService {
+  deleteBug(bugId:string)
+  {
+    return this.http.delete('http://localhost:8083/bug/'+bugId);
+  }
   putBug(bug:Bug) {
     return this.http.put('http://localhost:8083/bug/'+bug.id, bug, { headers: { "content-type": 'application/json' } });
   }

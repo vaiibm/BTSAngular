@@ -24,13 +24,13 @@
                 <input [(ngModel)]=bug.name class="form-control form-control-lg form-control-borderless" type="search"
                   placeholder="Enter Bug Name">
 
-                <!-- <button (click)='getBugs(bug.name)' style="margin: 10px;margin-right: 100px;"
-                  class="btn btn-lg btn-success"> Search</button> -->
+
                 <span class="col-1 col-md-1 col-lg-1"> </span>
                 <label> </label>
                 <label> </label>
                 <select placeholder=" ddd" style="margin: 10px;" class="form-control" id="status"
                   [(ngModel)]=bug.status>
+                  <option value=''>SELECT STATUS</option>
                   <option value='NEW'>NEW</option>
                   <option value='ASSIGNED'>ASSIGNED</option>
                   <option value='OPEN'>OPEN</option>
@@ -60,6 +60,8 @@
                     <th scope="col">SEVERITY</th>
                     <th scope="col">Project ID</th>
                     <th scope="col">Synopsis</th>
+                    <th scope='col'>Description</th>
+                    <th scope='col'>Action</th>
                   </tr>
 
 
@@ -74,9 +76,38 @@
                     <td>{{bug.eta | date}}</td>
                     <td>{{bug.severity}}</td>
                     <td>{{bug.projectId}}</td>
-                    <td>{{bug.synopsis}}</td>
+                    <td *ngIf="bug.synopsis.length<15">     {{bug.synopsis}}</td>
+                    <td *ngIf="!(bug.synopsis.length<15)">     {{bug.synopsis  | slice:0:15}}<small><span  class="btn btn-link btn-lg" data-toggle="modal" data-target="#myModal">...</span></small></td>
+                    <td *ngIf="bug.description.length<15">     {{bug.description}}</td>
+                    <td *ngIf="!(bug.description.length<15)">     {{bug.description  | slice:0:15}}<small><span  class="btn btn-link btn-lg" data-toggle="modal" data-target="#myModalDescription">...</span></small></td>
+                    <td><button (click)='deleteBug(bug.id,bug.name)' type="button" class="btn btn-default btn-sm"> <span class="glyphicon glyphicon-trash"></span> Delete </button></td>
 
                   </tr>
                 </tbody>
 
               </table>
+
+              <div id='showmore' >
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Synopsis</h4>
+                      </div>
+                      <div class="modal-body" id='showSynopsis'>
+                        <p>{{bugArray[0].synopsis}}</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                </div>

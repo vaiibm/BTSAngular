@@ -21,14 +21,14 @@ export class ShowBugsComponent implements OnInit {
         return alert("No Record found for given name");
       }
     },
-    error => {
-      console.log(error);
-      if (error.statusText!=='OK')
-        alert("Error not able to get record.  ")
-      else {
-        alert('Error not able to get record.');
-      }
-    });
+      error => {
+        console.log(error);
+        if (error.statusText !== 'OK')
+          alert("Error not able to get record.  ")
+        else {
+          alert('Error not able to get record.');
+        }
+      });
 
   }
 
@@ -43,10 +43,10 @@ export class ShowBugsComponent implements OnInit {
     },
       error => {
         console.log(error);
-        if (error.statusText!=='OK')
-          alert("Error not able to get record. " )
+        if (error.status != 200)
+          alert("Error not able to get record. ")
         else {
-          alert('Error not able to get record.');
+          alert('Record not loaded successfully');
         }
       });
   }
@@ -65,6 +65,35 @@ export class ShowBugsComponent implements OnInit {
       this.getBugs('');
     }
   }
+  deleteBug(bugId: string, name: string) {
+    var txt;
+    var r = confirm("Press a button to Delete this Bug - " + name);
+    if (r == true) {
+      const observable = this.bugService.deleteBug(bugId);
+      observable.subscribe(response => {
+        console.log(response);
+
+         alert("Bug Deleted Successfully");
+
+         return this.getBugs('');
+
+      },
+        error => {
+          console.log(error);
+          if (error.status != 200)
+            alert("Error Not able to delete Bug")
+          else {
+            alert('deleted vug successfully');
+            this.getBugs('');
+          }
+        });
+
+
+
+    } else {
+      txt = "You pressed Cancel!";
+    }
+  }
   getBugsByStatus(status: string) {
     const observable = this.bugService.getBugsByStatus(status);
     observable.subscribe(response => {
@@ -75,13 +104,14 @@ export class ShowBugsComponent implements OnInit {
     },
       error => {
         console.log(error);
-        if (error.statusText!=='OK')
+        if (error.status != 200)
           alert("Error not able to get record.")
         else {
           alert('Error not able to get record.');
         }
       });
   }
+
 
 
   ngOnInit(): void {
@@ -94,10 +124,10 @@ export class ShowBugsComponent implements OnInit {
         return alert("No Records available  currently from server");
       }
     },
-    error=>{
-      if(error.statusText!=='OK')
-      return alert("Unable to fetch records from server");
-    });
+      error => {
+        if (error.statusText !== 'OK')
+          return alert("Unable to fetch records from server");
+      });
   }
 
 }
