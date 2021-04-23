@@ -7,6 +7,7 @@ import { BugService } from '../bug.service';
   templateUrl: './bug-form.component.html',
   styleUrls: ['./bug-form.component.css', './style.css']
 })
+
 export class BugFormComponent implements OnChanges {
   @Input() bug: Bug = new Bug();
   bug1: Bug = new Bug();
@@ -15,6 +16,7 @@ export class BugFormComponent implements OnChanges {
   tempbug: any;
   bugArray: any;
   @Output("createBug") createBug: EventEmitter<Bug> = new EventEmitter<Bug>();
+
   getFieldData() {
     let takevalue = (<HTMLInputElement>document.getElementById('takevalue')).value;
     const observable = this.bugService.getBugs(takevalue);
@@ -24,14 +26,14 @@ export class BugFormComponent implements OnChanges {
         return alert("No Resposne for this input");
       }
       this.bug = this.tempbug;
-
-
     },
       error => {
         return alert("No Resposne for this input");
       });
   }
+
   constructor(private bugService: BugService) { }
+
   checkFunction() {
     let check = document.getElementById('buttonSave').innerHTML;
     if (check == 'Create Bug') {
@@ -40,11 +42,10 @@ export class BugFormComponent implements OnChanges {
     else {
       this.save();
     }
-
   }
+
   save() {
-    //this.createBug.emit(this.bug1);
-    this.bug.eta=new Date(this.bug.etaString);
+    this.bug.eta = new Date(this.bug.etaString);
     if (!this.bugService.validateBug(this.bug))
       return;
     const promise = this.bugService.putBug(this.bug);
@@ -52,7 +53,6 @@ export class BugFormComponent implements OnChanges {
       console.log(response);
       alert('bug updated..')
     },
-
       error => {
         console.log(error);
         if (error.status != 200)
@@ -64,15 +64,14 @@ export class BugFormComponent implements OnChanges {
   }
 
   savePost() {
-    this.bug.eta=new Date(this.bug.etaString);
+    this.bug.eta = new Date(this.bug.etaString);
     if (!this.bugService.validateBug(this.bug))
       return;
-    const promise = this.bugService.save(this.bug);
+    const promise = this.bugService.postBug(this.bug);
     promise.subscribe(response => {
       console.log(response);
       alert('bug created..')
     },
-
       error => {
         console.log(error);
         if (error.status != 201)
@@ -81,8 +80,8 @@ export class BugFormComponent implements OnChanges {
           alert('bug created..');
         }
       });
-
   }
+
   allMsgChangeLogs: string[] = [];
   allEmployeeChangeLogs: string[] = [];
   ngOnChanges(changes: SimpleChanges) {
@@ -90,9 +89,10 @@ export class BugFormComponent implements OnChanges {
     for (let propName in changes) {
       let change = changes[propName];
       this.bug = change.currentValue;
-      this.bug.etaString=this.bug.eta.toString().split('T')[0];
+      this.bug.etaString = this.bug.eta.toString().split('T')[0];
     }
   }
+
   ngOnInit(): void {
   }
 

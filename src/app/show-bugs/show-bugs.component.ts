@@ -1,18 +1,20 @@
-import { getNumberOfCurrencyDigits } from '@angular/common';
 import { ANALYZE_FOR_ENTRY_COMPONENTS, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Bug } from '../Bug';
 import { BugService } from '../bug.service'
+
 @Component({
   selector: 'app-show-bugs',
   templateUrl: './show-bugs.component.html',
   styleUrls: ['./show-bugs.component.css']
 })
+
 export class ShowBugsComponent implements OnInit {
   title: string = "show bugs";
   bug: Bug = new Bug();
   bugArray: any;
+
   constructor(private bugService: BugService) { };
+
   getBugs(name: string) {
     const observable = this.bugService.partialSearch(name);
     observable.subscribe(response => {
@@ -29,22 +31,19 @@ export class ShowBugsComponent implements OnInit {
           alert('Error not able to get record.');
         }
       });
-
   }
+
   showDescription(description: string) {
     document.getElementById('showDescription').innerHTML = description;
-
     return document.getElementById('temp').click();
   }
 
   showSynopsis(synopsis: string) {
     document.getElementById('showSynopsis').innerHTML = synopsis;
-
     return document.getElementById('synopsisButton').click();
   }
 
   getBugByNameAndStatus(name: string, status: string) {
-
     const observable = this.bugService.getBugByNameAndStatus(name, status);
     observable.subscribe(response => {
       console.log(response); this.bugArray = response;
@@ -64,7 +63,7 @@ export class ShowBugsComponent implements OnInit {
 
   getBug(name: string, status: string) {
     if (name.length > 50) {
-    return alert("Error : Name should be minimum 1 and maximum 50)");
+      return alert("Error : Name should be minimum 1 and maximum 50)");
     }
     if (name && status) {
       this.getBugByNameAndStatus(name, status);
@@ -80,17 +79,13 @@ export class ShowBugsComponent implements OnInit {
     }
   }
   deleteBug(bugId: string, name: string) {
-    var txt;
     var r = confirm("Press a button to Delete this Bug - " + name);
     if (r == true) {
       const observable = this.bugService.deleteBug(bugId);
       observable.subscribe(response => {
         console.log(response);
-
         alert("Bug Deleted Successfully");
-
         return this.getBugs('');
-
       },
         error => {
           console.log(error);
@@ -101,13 +96,9 @@ export class ShowBugsComponent implements OnInit {
             this.getBugs('');
           }
         });
-
-
-
-    } else {
-      txt = "You pressed Cancel!";
     }
   }
+
   getBugsByStatus(status: string) {
     const observable = this.bugService.getBugsByStatus(status);
     observable.subscribe(response => {
@@ -126,8 +117,6 @@ export class ShowBugsComponent implements OnInit {
       });
   }
 
-
-
   ngOnInit(): void {
     this.bug.status = '';
     this.bug.name = '';
@@ -143,7 +132,6 @@ export class ShowBugsComponent implements OnInit {
           return alert("Unable to fetch records from server");
       });
   }
-
 }
 
 

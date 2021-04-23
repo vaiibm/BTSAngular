@@ -1,29 +1,18 @@
 <div class="container-fluid text-center" style="background-color: #f8f9fa;">
-
   <div class="container-fluid text-center" style="background-color: #f8f9fa;;">
     <div class="row content">
       <div class="col-sm-2 sidenav" style="background-color: #bfcee0;">
 
         <app-sidenav></app-sidenav>
+
       </div>
-
       <div id="bugDetails" style="background-color: #f8f9fa;">
-
         <div class="form-inline">
           <div id='selectBug' style="background-color: #f8f9fb;">
-            <!-- <select class="form-control selectpicker" id="select-country" data-live-search="true">
-            <option data-tokens="china">China</option>
-        <option data-tokens="malayasia">Malayasia</option>
-        <option data-tokens="singapore">Singapore</option>
-            </select> -->
             <div id='showSearchBox' style="background-color: #ecf3f7;">
               <input style="margin-top: 20px;" class="form-control form-control-lg form-control-borderless"
                 type="search" id='takevalue' placeholder="Enter Bug Name"><button style="margin: 10px;"
                 (click)='partialSearch()' class="btn btn-lg btn-success"> Search</button>
-              <!-- <div id="partialHidden" style="display: none;">
-            <select (change)='getFieldData()' style="margin: 10px;" class="form-control" id='partialselect'>
-            </select>
-          </div> -->
             </div>
             <div id='showBugTable' style="display:none">
               <div class="col-sm-10 text-left" id="column1" style="background-color: #f8f9fa;">
@@ -38,18 +27,13 @@
                       <th scope="col">Synopsis</th>
                       <th scope='col'>Action</th>
                     </tr>
-
-
-                  </thead>
+               </thead>
                   <tbody>
                     <tr *ngFor='let bug1 of tempbug; index as i'>
                       <td>{{bug1.name}}</td>
-
                       <td>{{bug1.status}}</td>
-
                       <td>{{bug1.submitOn | date}}</td>
                       <td>{{bug1.eta | date}}</td>
-
                       <td>{{bug1.projectId}}</td>
                       <td *ngIf="bug1.synopsis.length<15"> {{bug1.synopsis}}</td>
                       <td *ngIf="!(bug1.synopsis.length<15)"> {{bug1.synopsis | slice:0:15}}..<sub><button
@@ -58,10 +42,8 @@
                       <td><button (click)='editBug(i)' onMouseOver="this.style.color='#FF0000'"
                           onMouseOut="this.style.color='#000000'" type="button" class="btn btn-link  "> <span
                             class="glyphicon glyphicon-pencil"> Edit </span> </button></td>
-
                     </tr>
                   </tbody>
-
                 </table>
               </div>
             </div>
@@ -69,6 +51,7 @@
           <div id='showmore'>
             <span style="display:none" class="btn btn-link btn-lg" data-toggle="modal" data-target="#myModal"
               id='synopsisButton'>...</span>
+
 
             <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
@@ -96,7 +79,6 @@
               </button>
               <app-bug-form [bug]="bug"></app-bug-form>
             </div>
-
           </div>
         </div>
       </div>

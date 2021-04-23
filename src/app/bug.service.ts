@@ -5,34 +5,37 @@ import { Bug } from './Bug';
 @Injectable({
   providedIn: 'root'
 })
+
 export class BugService {
-  deleteBug(bugId: string) {
-    return this.http.delete('http://localhost:8083/bug/' + bugId);
-  }
-  putBug(bug: Bug) {
-    return this.http.put('http://localhost:8083/bug/' + bug.id, bug, { headers: { "content-type": 'application/json' } });
-  }
-  getBugByNameAndStatus(name: string, status: string) {
-    return this.http.get('http://localhost:8083/bug/search?status=' + status + '&name=' + name);
-  }
-
-
-
+  BUGURL: string = "http://localhost:8083/bug";
   constructor(private http: HttpClient) { }
-  save(bug: Bug) {
-    return this.http.post('http://localhost:8083/bug', bug, { headers: { "content-type": 'application/json' } });
+
+  deleteBug(bugId: string) {
+    return this.http.delete(this.BUGURL + '/' + bugId);
   }
+
+  putBug(bug: Bug) {
+    return this.http.put(this.BUGURL + '/' + bug.id, bug, { headers: { "content-type": 'application/json' } });
+  }
+
+  postBug(bug: Bug) {
+    return this.http.post(this.BUGURL + '', bug, { headers: { "content-type": 'application/json' } });
+  }
+
   getBugs(name: string) {
-    return this.http.get('http://localhost:8083/bug/' + name);
+    return this.http.get(this.BUGURL + '/' + name);
   }
 
   getBugsByStatus(status: string) {
-    return this.http.get('http://localhost:8083/bug/status/' + status);
+    return this.http.get(this.BUGURL + '/status/' + status);
   }
 
-  partialSearch(bugName:string)
-  {
-    return this.http.get('http://localhost:8083/bug/partialsearch/*'+bugName+"*")
+  partialSearch(bugName: string) {
+    return this.http.get(this.BUGURL + '/partialsearch/*' + bugName + "*")
+  }
+
+  getBugByNameAndStatus(name: string, status: string) {
+    return this.http.get(this.BUGURL + '/search?status=' + status + '&name=' + name);
   }
 
   validateBug(bug: Bug) {
@@ -45,13 +48,11 @@ export class BugService {
         error++;
         errorText += error + ". Error- Name should be minimum 1 and maximum 50) \n";
       }
-
     }
     else {
       error++;
       errorText += error + ". Error- Name is mandatory \n";
     }
-
 
     if (bug.status) {
     }
@@ -68,16 +69,13 @@ export class BugService {
     }
 
     if (bug.severity) {
-
     }
     else {
       error++;
       errorText += error + ". Error- severity is mandatory \n";
     }
 
-
     if (bug.type) {
-
     }
     else {
       error++;
@@ -90,14 +88,11 @@ export class BugService {
         error++;
         errorText += error + ". Error- projectId should be minimum 1 and maximum 25 and spaces not allowed) \n";
       }
-
-
     }
     else {
       error++;
       errorText += error + ". Error- projectId is mandatory \n";
     }
-
 
     if (bug.synopsis) {
       let remText = bug.synopsis.replace(/ /g, "");
@@ -105,8 +100,6 @@ export class BugService {
         error++;
         errorText += error + ". Error- synopsis should be minimum 10 and maximum 100) \n";
       }
-
-
     }
     else {
       error++;
@@ -119,14 +112,11 @@ export class BugService {
         error++;
         errorText += error + ". Error- module should be minimum 10 and maximum 50) \n";
       }
-
-
     }
     else {
       error++;
       errorText += error + ". Error- module is mandatory \n";
     }
-
 
     if (bug.description) {
       let remText = bug.description.replace(/ /g, "");
@@ -140,24 +130,16 @@ export class BugService {
       errorText += error + ". Error- description is mandatory \n";
     }
 
-
-
-
     if (bug.buildVersion) {
       let remText = bug.buildVersion.replace(/ /g, "");
       if (remText.length < 1 || remText.length > 25) {
         error++;
         errorText += error + ". Error- buildVersion should be minimum 1 and maximum 25) \n";
       }
-
     }
-
-
 
     if (bug.eta) {
-
     }
-
 
     if (bug.testerId) {
       let remText = bug.testerId.replace(/ /g, "");
@@ -165,9 +147,7 @@ export class BugService {
         error++;
         errorText += error + ". Error- testerId should be minimum 1 and maximum 25 and no spaces allowed) \n";
       }
-
     }
-
 
     if (bug.developerId) {
       let remText = bug.developerId.replace(/ /g, "");
@@ -175,15 +155,11 @@ export class BugService {
         error++;
         errorText += error + ". Error- developerId should be minimum 1 and maximum 25 and no spaces allowed) \n";
       }
-
     }
-
-
 
     if (error) {
       if (error < 4) {
         alert("Total error are : " + error + "\n" + errorText);
-
       }
       else {
         alert("total Errors are : " + error + "\n" + errorText);
@@ -193,7 +169,5 @@ export class BugService {
     else {
       return 1;
     }
-
-
   }
 }

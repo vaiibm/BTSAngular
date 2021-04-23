@@ -1,30 +1,18 @@
 <div class="container-fluid text-center" style="background-color: #f8f9fa;">
   <div class="row content">
     <div style="background-color: #bfcee0;padding-bottom: 1%;padding-top: 1%;">
-
-
       <app-sidenav></app-sidenav>
     </div>
-
-
-
-
     <div id='search' class="col-sm-12 bg-light text-dark" style="background-color:#f8f9fa">
       <div class="container">
         <br>
         <div class="row justify-content-center">
-
           <div class="col-8 col-md-12 col-lg-12">
-
             <div class="card-body row no-gutters align-items-center">
-
               <!--end of col-->
               <div class="form-inline">
-
                 <input [(ngModel)]=bug.name class="form-control form-control-lg form-control-borderless" type="search"
                   placeholder="Enter Bug Name">
-
-
                 <span class="col-1 col-md-1 col-lg-1"> </span>
                 <label> </label>
                 <label> </label>
@@ -45,11 +33,9 @@
                   <option value='DEFERRED'>DEFERRED</option>
                   <option value='NOT_A_BUG'>NOT_A_BUG</option>
                 </select>
-
                 <button style="margin: 10px;" (click)='getBug(bug.name,bug.status)' class="btn btn-lg btn-success">
                   Search</button><br><br>
               </div>
-
               <table class="table table-bordered">
                 <thead style="text-align-last: center;">
                   <tr>
@@ -63,15 +49,11 @@
                     <th scope='col'>Description</th>
                     <th scope='col'>Action</th>
                   </tr>
-
-
                 </thead>
                 <tbody>
                   <tr *ngFor='let bug of bugArray; index as i'>
                     <td>{{bug.name}}</td>
-
                     <td>{{bug.status}}</td>
-
                     <td>{{bug.type}}</td>
                     <td>{{bug.eta | date}}</td>
                     <td>{{bug.severity}}</td>
@@ -87,12 +69,9 @@
                         (click)='deleteBug(bug.id,bug.name)' onMouseOver="this.style.color='#FF0000'"
                         onMouseOut="this.style.color='#000000'" type="button" class="btn btn-link btn-sm"> <span
                           class="glyphicon glyphicon-trash"></span> Delete </button></td>
-
                   </tr>
                 </tbody>
-
               </table>
-
               <div id='showmore'>
                 <span style="display:none" class="btn btn-link btn-lg" data-toggle="modal" data-target="#myModal"
                   id='synopsisButton'>...</span>
