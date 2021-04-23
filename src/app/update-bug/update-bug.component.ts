@@ -20,16 +20,55 @@ export class UpdateBugComponent implements OnInit {
   constructor(private bugService: BugService) { }
 
   getFieldData() {
+    // let takevalue = (<HTMLInputElement>document.getElementById('takevalue')).value;
+    // const observable = this.bugService.getBugs(takevalue);
+    // observable.subscribe(response => {
+    //   this.tempbug = response;
+    //   if (this.tempbug[0] == undefined) {
+    //     return alert("No Resposne for this input");
+    //   }
+    //   this.bug = this.tempbug;
+    //   //this.ess=this.bug.eta.toString().split('T')[0];
+
+
+    // },
+    //   erro => {
+    //     return alert("No Resposne for this input");
+    //   });
+   let value= (<HTMLInputElement>document.getElementById('partialselect')).value;
+   if(value=='')
+   {
+this.bug=null;
+   }
+   else{
+   this.bug=this.tempbug[value];}
+
+  }
+
+  partialSearch()
+  {
     let takevalue = (<HTMLInputElement>document.getElementById('takevalue')).value;
-    const observable = this.bugService.getBugs(takevalue);
+    const observable = this.bugService.partialSearch(takevalue);
     observable.subscribe(response => {
       this.tempbug = response;
       if (this.tempbug[0] == undefined) {
         return alert("No Resposne for this input");
       }
-      this.bug = this.tempbug;
-      //this.ess=this.bug.eta.toString().split('T')[0];
-
+      if(this.tempbug[1]!=undefined)
+      {
+      let txt='';
+      txt+="<option value='' > SELECT BUG </option>";
+      for(let i=0;i<this.tempbug.length;i++)
+      {
+        txt+="<option value='"+i+"'>"+this.tempbug[i].name+"</option>";
+      }
+      txt+="";
+      document.getElementById('partialselect').innerHTML=txt;
+      document.getElementById('partialHidden').style.display="block";
+    }
+      // this.bug = this.tempbug;
+      // //this.ess=this.bug.eta.toString().split('T')[0];
+       console.log(this.tempbug);
 
     },
       erro => {

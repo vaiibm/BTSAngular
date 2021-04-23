@@ -30,15 +30,20 @@ export class BugService {
     return this.http.get('http://localhost:8083/bug/status/' + status);
   }
 
+  partialSearch(bugName:string)
+  {
+    return this.http.get('http://localhost:8083/bug/partialsearch/'+bugName)
+  }
+
   validateBug(bug: Bug) {
     let error = 0;
     let errorText = "";
 
     if (bug.name) {
       let remText = bug.name.replace(/ /g, "");
-      if (remText.length < 1 || remText.length > 25) {
+      if (remText.length < 1 || remText.length > 50) {
         error++;
-        errorText += error + ". Error- Name should be minimum 1 and maximum 25) \n";
+        errorText += error + ". Error- Name should be minimum 1 and maximum 50) \n";
       }
 
     }
@@ -96,9 +101,9 @@ export class BugService {
 
     if (bug.synopsis) {
       let remText = bug.synopsis.replace(/ /g, "");
-      if (remText.length < 10 || remText.length > 50) {
+      if (remText.length < 10 || remText.length > 100) {
         error++;
-        errorText += error + ". Error- synopsis should be minimum 10 and maximum 50) \n";
+        errorText += error + ". Error- synopsis should be minimum 10 and maximum 100) \n";
       }
 
 
@@ -125,9 +130,9 @@ export class BugService {
 
     if (bug.description) {
       let remText = bug.description.replace(/ /g, "");
-      if (remText.length < 10 || remText.length > 200) {
+      if (remText.length < 10 || remText.length > 500) {
         error++;
-        errorText += error + ". Error- description should be minimum 10 and maximum 200) \n";
+        errorText += error + ". Error- description should be minimum 10 and maximum 500) \n";
       }
     }
     else {

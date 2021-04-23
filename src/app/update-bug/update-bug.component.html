@@ -17,8 +17,12 @@
         <option data-tokens="singapore">Singapore</option>
             </select> -->
           <input style="margin-top: 20px;" class="form-control form-control-lg form-control-borderless" type="search"
-            id='takevalue' placeholder="Enter Bug Name"><button style="margin: 10px;" (click)='getFieldData()'
+            id='takevalue' placeholder="Enter Bug Name"><button style="margin: 10px;" (click)='partialSearch()'
             class="btn btn-lg btn-success"> Search</button>
+            <div id="partialHidden" style="display: none;">
+            <select (change)='getFieldData()' style="margin: 10px;" class="form-control" id='partialselect'>
+            </select>
+          </div>
         </div>
 
 

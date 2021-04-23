@@ -94,7 +94,7 @@ export class ShowBugsComponent implements OnInit {
           if (error.status != 200)
             alert("Error Not able to delete Bug")
           else {
-            alert('deleted vug successfully');
+            alert('deleted Bug successfully');
             this.getBugs('');
           }
         });
