@@ -1,6 +1,6 @@
 <div class="container-fluid text-center" style="background-color: #f8f9fa;">
 
-  <div class="container-fluid text-center" style="background-color: #bfcee0;;">
+  <div class="container-fluid text-center" style="background-color: #f8f9fa;;">
     <div class="row content">
       <div class="col-sm-2 sidenav" style="background-color: #bfcee0;">
 
@@ -9,22 +9,96 @@
 
       <div id="bugDetails" style="background-color: #f8f9fa;">
 
-      <div class="form-inline">
-        <div id='selectBug' style="background-color: #f8f9fb;">
-          <!-- <select class="form-control selectpicker" id="select-country" data-live-search="true">
+        <div class="form-inline">
+          <div id='selectBug' style="background-color: #f8f9fb;">
+            <!-- <select class="form-control selectpicker" id="select-country" data-live-search="true">
             <option data-tokens="china">China</option>
         <option data-tokens="malayasia">Malayasia</option>
         <option data-tokens="singapore">Singapore</option>
             </select> -->
-          <input style="margin-top: 20px;" class="form-control form-control-lg form-control-borderless" type="search"
-            id='takevalue' placeholder="Enter Bug Name"><button style="margin: 10px;" (click)='partialSearch()'
-            class="btn btn-lg btn-success"> Search</button>
-            <div id="partialHidden" style="display: none;">
+            <div id='showSearchBox' style="background-color: #ecf3f7;">
+              <input style="margin-top: 20px;" class="form-control form-control-lg form-control-borderless"
+                type="search" id='takevalue' placeholder="Enter Bug Name"><button style="margin: 10px;"
+                (click)='partialSearch()' class="btn btn-lg btn-success"> Search</button>
+              <!-- <div id="partialHidden" style="display: none;">
             <select (change)='getFieldData()' style="margin: 10px;" class="form-control" id='partialselect'>
             </select>
+          </div> -->
+            </div>
+            <div id='showBugTable' style="display:none">
+              <div class="col-sm-10 text-left" id="column1" style="background-color: #f8f9fa;">
+                <table class="table table-bordered">
+                  <thead style="text-align-last: center;">
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">STATUS</th>
+                      <th scope="col">Submitted On</th>
+                      <th scope="col" s>ETA</th>
+                      <th scope="col">Project ID</th>
+                      <th scope="col">Synopsis</th>
+                      <th scope='col'>Action</th>
+                    </tr>
+
+
+                  </thead>
+                  <tbody>
+                    <tr *ngFor='let bug1 of tempbug; index as i'>
+                      <td>{{bug1.name}}</td>
+
+                      <td>{{bug1.status}}</td>
+
+                      <td>{{bug1.submitOn | date}}</td>
+                      <td>{{bug1.eta | date}}</td>
+
+                      <td>{{bug1.projectId}}</td>
+                      <td *ngIf="bug1.synopsis.length<15"> {{bug1.synopsis}}</td>
+                      <td *ngIf="!(bug1.synopsis.length<15)"> {{bug1.synopsis | slice:0:15}}..<sub><button
+                            class="btn btn-link btn-xs" (click)=showSynopsis(bug1.synopsis)>Read More</button></sub>
+                      </td>
+                      <td><button (click)='editBug(i)' onMouseOver="this.style.color='#FF0000'"
+                          onMouseOut="this.style.color='#000000'" type="button" class="btn btn-link  "> <span
+                            class="glyphicon glyphicon-pencil"> Edit </span> </button></td>
+
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id='showmore'>
+            <span style="display:none" class="btn btn-link btn-lg" data-toggle="modal" data-target="#myModal"
+              id='synopsisButton'>...</span>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Synopsis</h4>
+                  </div>
+                  <div class="modal-body" id='showSynopsis'>
+                    <p></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div id="showEditBug" style="display:none">
+              <button (click)='closeEditBug()' type="button" class="close" aria-label="Close">
+                <span style="font-size: xx-large;" aria-hidden="true">&times;</span>
+              </button>
+              <app-bug-form [bug]="bug"></app-bug-form>
+            </div>
+
           </div>
         </div>
-
-
-            <app-bug-form [bug]="bug"></app-bug-form>
-            </div></div></div></div>
+      </div>
+    </div>
+  </div>

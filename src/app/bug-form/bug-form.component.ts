@@ -44,6 +44,7 @@ export class BugFormComponent implements OnChanges {
   }
   save() {
     //this.createBug.emit(this.bug1);
+    this.bug.eta=new Date(this.bug.etaString);
     if (!this.bugService.validateBug(this.bug))
       return;
     const promise = this.bugService.putBug(this.bug);
@@ -63,6 +64,7 @@ export class BugFormComponent implements OnChanges {
   }
 
   savePost() {
+    this.bug.eta=new Date(this.bug.etaString);
     if (!this.bugService.validateBug(this.bug))
       return;
     const promise = this.bugService.save(this.bug);
@@ -87,16 +89,8 @@ export class BugFormComponent implements OnChanges {
 
     for (let propName in changes) {
       let change = changes[propName];
-
-      this.bug = change.currentValue[0];
-      // let prevVal = JSON.stringify(change.previousValue);
-      // let changeLog = `${propName}: currentValue = ${curVal}, previousValue = ${prevVal}`;
-
-      // if (propName === 'message') {
-      //    this.allMsgChangeLogs.push(changeLog);
-      // } else if (propName === 'employee') {
-      //    this.allEmployeeChangeLogs.push(changeLog);
-      // }
+      this.bug = change.currentValue;
+      this.bug.etaString=this.bug.eta.toString().split('T')[0];
     }
   }
   ngOnInit(): void {

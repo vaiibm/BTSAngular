@@ -32,7 +32,7 @@ export class BugService {
 
   partialSearch(bugName:string)
   {
-    return this.http.get('http://localhost:8083/bug/partialsearch/'+bugName)
+    return this.http.get('http://localhost:8083/bug/partialsearch/*'+bugName+"*")
   }
 
   validateBug(bug: Bug) {

@@ -14,7 +14,7 @@ export class ShowBugsComponent implements OnInit {
   bugArray: any;
   constructor(private bugService: BugService) { };
   getBugs(name: string) {
-    const observable = this.bugService.getBugs(name);
+    const observable = this.bugService.partialSearch(name);
     observable.subscribe(response => {
       console.log(response); this.bugArray = response;
       if (this.bugArray[0] == undefined) {
@@ -63,6 +63,9 @@ export class ShowBugsComponent implements OnInit {
   }
 
   getBug(name: string, status: string) {
+    if (name.length > 50) {
+    return alert("Error : Name should be minimum 1 and maximum 50)");
+    }
     if (name && status) {
       this.getBugByNameAndStatus(name, status);
     }

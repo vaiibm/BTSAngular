@@ -15,10 +15,16 @@ export class UpdateBugComponent implements OnInit {
   title: string = "update bugs";
   bug: Bug = new Bug();
   tempbug: any;
+  tbug: any;;
   selectId: string;
   ess: any;
   constructor(private bugService: BugService) { }
-
+editBug(index:number)
+{
+this.bug=this.tempbug[index];
+document.getElementById('showBugTable').style.display='none';
+document.getElementById('showEditBug').style.display='block';
+}
   getFieldData() {
     // let takevalue = (<HTMLInputElement>document.getElementById('takevalue')).value;
     // const observable = this.bugService.getBugs(takevalue);
@@ -35,40 +41,55 @@ export class UpdateBugComponent implements OnInit {
     //   erro => {
     //     return alert("No Resposne for this input");
     //   });
-   let value= (<HTMLInputElement>document.getElementById('partialselect')).value;
-   if(value=='')
-   {
-this.bug=null;
-   }
-   else{
-   this.bug=this.tempbug[value];}
+    let value = (<HTMLInputElement>document.getElementById('partialselect')).value;
+    if (value == '') {
+      let val = ' ';
+      let tBug = this.bug;
+      let setAll = (bug, val) => Object.keys(bug).forEach(k => bug.k = val);
+      let setNull = (tBug) => setAll(tBug,val);
+      this.bug=tBug;
+     // this.bug = null;
+    }
+    else {
+      this.bug = this.tempbug[value];
+    }
 
   }
+  showSynopsis(synopsis: string) {
+    document.getElementById('showSynopsis').innerHTML = synopsis;
 
-  partialSearch()
+    return document.getElementById('synopsisButton').click();
+  }
+
+  closeEditBug()
   {
+    document.getElementById('showEditBug').style.display='none';
+    document.getElementById('showBugTable').style.display='block';
+  }
+  partialSearch() {
+    document.getElementById('showEditBug').style.display='none';
+
     let takevalue = (<HTMLInputElement>document.getElementById('takevalue')).value;
+    let remText =takevalue.replace(/ /g, "");
+    if (remText.length > 50) {
+    return alert("Error : Name should be minimum 1 and maximum 50)");
+    }
     const observable = this.bugService.partialSearch(takevalue);
     observable.subscribe(response => {
       this.tempbug = response;
+      //document.getElementById('partialHidden').style.display = "none";
       if (this.tempbug[0] == undefined) {
         return alert("No Resposne for this input");
       }
-      if(this.tempbug[1]!=undefined)
-      {
-      let txt='';
-      txt+="<option value='' > SELECT BUG </option>";
-      for(let i=0;i<this.tempbug.length;i++)
-      {
-        txt+="<option value='"+i+"'>"+this.tempbug[i].name+"</option>";
+      if (this.tempbug[0] != undefined) {
+        document.getElementById('showBugTable').style.display='block'
       }
-      txt+="";
-      document.getElementById('partialselect').innerHTML=txt;
-      document.getElementById('partialHidden').style.display="block";
-    }
+      else{
+        this.bug=this.tempbug[0];
+      }
       // this.bug = this.tempbug;
-      // //this.ess=this.bug.eta.toString().split('T')[0];
-       console.log(this.tempbug);
+      this.bug.etaString=this.bug.eta.toString().split('T')[0];
+      console.log(this.tempbug);
 
     },
       erro => {

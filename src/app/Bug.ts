@@ -13,5 +13,6 @@ export class Bug {
   synopsis: string;
   description: string;
   eta: Date;
-
+  submitOn:Date;
+  etaString:string;
 }
