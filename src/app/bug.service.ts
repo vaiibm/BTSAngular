@@ -96,9 +96,9 @@ export class BugService {
 
     if (bug.synopsis) {
       let remText = bug.synopsis.replace(/ /g, "");
-      if (remText.length < 10 || remText.length > 100) {
+      if (remText.length < 10 || remText.length > 200) {
         error++;
-        errorText += error + ". Error- synopsis should be minimum 10 and maximum 100) \n";
+        errorText += error + ". Error- synopsis should be minimum 10 and maximum 200) \n";
       }
     }
     else {

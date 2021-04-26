@@ -82,6 +82,7 @@ export class UpdateBugComponent implements OnInit {
     document.getElementById('createbutton').className = 'btn btn-primary';
     document.getElementById('updatebutton').className = 'btn btn-link';
     document.getElementById('buttonSave').innerHTML = 'Update Bug';
+    document.getElementById('updatebutton').style.border =  "2px solid #2196F3";
   }
 }
 

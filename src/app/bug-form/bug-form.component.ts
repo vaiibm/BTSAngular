@@ -82,6 +82,18 @@ export class BugFormComponent implements OnChanges {
       });
   }
 
+  textCounter( field:string, countfield:string, maxlimit:number ) {
+    let dsize= (<HTMLInputElement>document.getElementById(field));
+    if ( dsize.value.length > maxlimit ) {
+     dsize.value = dsize.value.substring( 0, maxlimit );
+     dsize.blur();
+     dsize.focus();
+     return false;
+    } else {
+     document.getElementById(countfield).innerHTML = "<i>* " + (maxlimit - dsize.value.length)+" characters remaining</i>";
+    }
+   }
+
   allMsgChangeLogs: string[] = [];
   allEmployeeChangeLogs: string[] = [];
   ngOnChanges(changes: SimpleChanges) {

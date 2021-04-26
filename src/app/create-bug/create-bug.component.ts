@@ -39,6 +39,7 @@ export class CreateBugComponent implements OnInit {
     document.getElementById('searchbutton').className = 'btn btn-primary';
     document.getElementById('createbutton').className = 'btn btn-link';
     document.getElementById('buttonSave').innerHTML = 'Create Bug'
+    document.getElementById('createbutton').style.border =  "2px solid #2196F3";
   }
 
 }

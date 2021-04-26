@@ -118,6 +118,7 @@ export class ShowBugsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    document.getElementById('searchbutton').style.border =  "2px solid #2196F3";
     this.bug.status = '';
     this.bug.name = '';
     const observable = this.bugService.getBugs('');
