@@ -11,11 +11,11 @@ import { BugService } from '../bug.service';
 export class BugFormComponent implements OnChanges {
   @Input() bug: Bug = new Bug();
   bug1: Bug = new Bug();
-  //@Output("getFieldData") getFieldData: EventEmitter<any> = new EventEmitter();
+  // @Output() getFieldData = new EventEmitter(Bug);
   name: string = '';
   tempbug: any;
   bugArray: any;
-  @Output("createBug") createBug: EventEmitter<Bug> = new EventEmitter<Bug>();
+  @Output("sendBug") sendBug: EventEmitter<Bug> = new EventEmitter<Bug>();
 
   getFieldData() {
     let takevalue = (<HTMLInputElement>document.getElementById('takevalue')).value;
@@ -32,55 +32,60 @@ export class BugFormComponent implements OnChanges {
       });
   }
 
+  postBugParent()
+  {
+    this.sendBug.emit(this.bug);
+  }
+
   constructor(private bugService: BugService) { }
 
-  checkFunction() {
-    let check = document.getElementById('buttonSave').innerHTML;
-    if (check == 'Create Bug') {
-      this.savePost();
-    }
-    else {
-      this.save();
-    }
-  }
+  // checkFunction() {
+  //   let check = document.getElementById('buttonSave').innerHTML;
+  //   if (check == 'Create Bug') {
+  //     this.sendBug.emit(this.bug);
+  //   }
+  //   else {
+  //     this.sendBugUpdate.emit(this.bug);
+  //   }
+  // }
 
-  save() {
-    this.bug.eta = new Date(this.bug.etaString);
-    if (!this.bugService.validateBug(this.bug))
-      return;
-    const promise = this.bugService.putBug(this.bug);
-    promise.subscribe(response => {
-      console.log(response);
-      alert('bug updated..')
-    },
-      error => {
-        console.log(error);
-        if (error.status != 200)
-          alert("Error !! : " + error.headers.get("error"))
-        else {
-          alert('Bug Updated');
-        }
-      });
-  }
+  // save() {
+  //   this.bug.eta = new Date(this.bug.etaString);
+  //   if (!this.bugService.validateBug(this.bug))
+  //     return;
+  //   const promise = this.bugService.putBug(this.bug);
+  //   promise.subscribe(response => {
+  //     console.log(response);
+  //     alert('bug updated..')
+  //   },
+  //     error => {
+  //       console.log(error);
+  //       if (error.status != 200)
+  //         alert("Error !! : " + error.headers.get("error"))
+  //       else {
+  //         alert('Bug Updated');
+  //       }
+  //     });
+  // }
 
-  savePost() {
-    this.bug.eta = new Date(this.bug.etaString);
-    if (!this.bugService.validateBug(this.bug))
-      return;
-    const promise = this.bugService.postBug(this.bug);
-    promise.subscribe(response => {
-      console.log(response);
-      alert('bug created..')
-    },
-      error => {
-        console.log(error);
-        if (error.status != 201)
-          alert("Error !! : " + error.headers.get("error"))
-        else {
-          alert('bug created..');
-        }
-      });
-  }
+  // savePost() {
+  //   this.bug.eta = new Date(this.bug.etaString);
+  //   if (!this.bugService.validateBug(this.bug))
+  //     return;
+  //   const promise = this.bugService.postBug(this.bug);
+  //   promise.subscribe(response => {
+  //     console.log(response);
+  //     alert('bug created..')
+  //   },
+  //     error => {
+  //       console.log(error);
+  //       if (error.status != 201)
+  //         alert("Error !! : " + error.headers.get("error"))
+  //       else {
+  //         alert('bug created..');
+  //       }
+  //     });
+  // }
 
   textCounter( field:string, countfield:string, maxlimit:number ) {
     let dsize= (<HTMLInputElement>document.getElementById(field));

@@ -76,6 +76,25 @@ export class UpdateBugComponent implements OnInit {
       });
   }
 
+  putBugParent(bugTemp:Bug){
+    bugTemp.eta = new Date(bugTemp.etaString);
+    if (!this.bugService.validateBug(bugTemp))
+      return;
+    const promise = this.bugService.putBug(bugTemp);
+    promise.subscribe(response => {
+      console.log(response);
+      alert('bug updated..')
+    },
+      error => {
+        console.log(error);
+        if (error.status != 200)
+          alert("Error !! : " + error.headers.get("error"))
+        else {
+          alert('Bug Updated');
+        }
+      });
+  }
+
   ngOnInit(): void {
     document.getElementById('buttonSave').innerHTML = 'Update Bug';
     document.getElementById('searchbutton').className = 'btn btn-primary';

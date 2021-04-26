@@ -16,21 +16,21 @@ export class CreateBugComponent implements OnInit {
 
   constructor(private bugService: BugService) { }
 
-  createBug(bug: Bug) {
-    alert("in parent")
-    if (!this.bugService.validateBug(bug))
+  postBugParent(bugTemp: Bug) {
+    bugTemp.eta = new Date(bugTemp.etaString);
+    if (!this.bugService.validateBug(bugTemp))
       return;
-    const promise = this.bugService.postBug(bug);
+    const promise = this.bugService.postBug(bugTemp);
     promise.subscribe(response => {
       console.log(response);
-      alert('bug added..')
+      alert('bug created..')
     },
       error => {
         console.log(error);
-        if (error.statusText !== 'OK')
+        if (error.status != 201)
           alert("Error !! : " + error.headers.get("error"))
         else {
-          alert('bug added..');
+          alert('bug created..');
         }
       });
   }
@@ -39,7 +39,7 @@ export class CreateBugComponent implements OnInit {
     document.getElementById('searchbutton').className = 'btn btn-primary';
     document.getElementById('createbutton').className = 'btn btn-link';
     document.getElementById('buttonSave').innerHTML = 'Create Bug'
-    document.getElementById('createbutton').style.border =  "2px solid #2196F3";
+    document.getElementById('createbutton').style.border = "2px solid #2196F3";
   }
 
 }

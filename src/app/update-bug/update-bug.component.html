@@ -77,7 +77,7 @@
               <button (click)='closeEditBug()' type="button" class="close" aria-label="Close">
                 <span style="font-size: xx-large;" aria-hidden="true">&times;</span>
               </button>
-              <app-bug-form [bug]="bug"></app-bug-form>
+              <app-bug-form  (sendBug)="putBugParent($event)" [bug]="bug"></app-bug-form>
             </div>
           </div>
         </div>

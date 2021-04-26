@@ -8,4 +8,4 @@
       </div>
       <div id="bugDetails" style="background-color: #f8f9fa;">
         <div class="form-inline">
-          <app-bug-form></app-bug-form>
+          <app-bug-form (sendBug)="postBugParent($event)"></app-bug-form>
