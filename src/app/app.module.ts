@@ -29,7 +29,7 @@ import { SelectBugComponent } from './select-bug/select-bug.component';
       {path: 'search', component: ShowBugsComponent},
       {path: 'update', component: UpdateBugComponent},
       {path: '', redirectTo: '/search', pathMatch: 'full'},
-    ]),
+    ],{useHash: true}),
     HttpClientModule,FormsModule
   ],
   providers: [],
