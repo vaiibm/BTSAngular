@@ -7,7 +7,7 @@ import { Bug } from './Bug';
 })
 
 export class BugService {
-  BUGURL: string = "http://localhost:8083/bug";
+  BUGURL: string = "http://13.232.193.87:8083/bug";
   constructor(private http: HttpClient) { }
 
   deleteBug(bugId: string) {
